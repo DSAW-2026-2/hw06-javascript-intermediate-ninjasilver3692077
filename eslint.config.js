@@ -8,8 +8,9 @@ export default [
       ecmaVersion: 'latest',
       sourceType: 'module',
       globals: {
-        document: 'readonly',
-        retos: 'readonly'
+      document: 'readonly',
+      localStorage: 'readonly',
+      challenges: 'readonly'
       }
     },
     rules: {
