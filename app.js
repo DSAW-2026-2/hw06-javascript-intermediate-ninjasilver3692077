@@ -118,6 +118,157 @@ const renderStats = (items) => {
     <p class="sm:col-span-2 lg:col-span-4 text-sm text-slate-500 dark:text-slate-400">${categorySummary || 'No category data for the current filters.'}</p>`;
 };
 
+const getGroupSummary = () =>
+  challenges.reduce((accumulator, { group, points, participants, status }) => {
+    const currentGroup = accumulator[group] || {
+      group,
+      challenges: 0,
+      totalPoints: 0,
+      participationEntries: 0,
+      activeChallenges: 0
+    };
+
+    return {
+      ...accumulator,
+      [group]: {
+        group,
+        challenges: currentGroup.challenges + 1,
+        totalPoints: currentGroup.totalPoints + points,
+        participationEntries:
+          currentGroup.participationEntries + participants,
+        activeChallenges:
+          currentGroup.activeChallenges + (status === 'Active' ? 1 : 0)
+      }
+    };
+  }, {});
+
+const renderGroups = () => {
+  const groups = Object.values(getGroupSummary());
+
+  groupsList.innerHTML = groups
+    .map(
+      ({
+        group,
+        challenges: challengeCount,
+        totalPoints,
+        participationEntries,
+        activeChallenges
+      }) => `
+        <article
+          class="rounded-xl border border-slate-200 bg-slate-50 p-5 dark:border-slate-700 dark:bg-slate-800"
+        >
+          <div class="flex items-start justify-between gap-3">
+            <div>
+              <p
+                class="text-xs font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-300"
+              >
+                PlayReal Group
+              </p>
+
+              <h3 class="mt-1 text-xl font-bold">
+                ${group}
+              </h3>
+            </div>
+
+            <span
+              class="rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700 dark:bg-blue-950 dark:text-blue-300"
+            >
+              ${activeChallenges} active
+            </span>
+          </div>
+
+          <dl class="mt-5 grid grid-cols-3 gap-3 text-sm">
+            <div>
+              <dt
+                class="text-xs uppercase text-slate-500 dark:text-slate-400"
+              >
+                Challenges
+              </dt>
+
+              <dd class="mt-1 text-lg font-bold">
+                ${challengeCount}
+              </dd>
+            </div>
+
+            <div>
+              <dt
+                class="text-xs uppercase text-slate-500 dark:text-slate-400"
+              >
+                Points
+              </dt>
+
+              <dd
+                class="mt-1 text-lg font-bold text-blue-700 dark:text-blue-300"
+              >
+                ${totalPoints}
+              </dd>
+            </div>
+
+            <div>
+              <dt
+                class="text-xs uppercase text-slate-500 dark:text-slate-400"
+              >
+                Entries
+              </dt>
+
+              <dd class="mt-1 text-lg font-bold">
+                ${participationEntries}
+              </dd>
+            </div>
+          </dl>
+        </article>
+      `
+    )
+    .join('');
+};
+
+const renderRanking = () => {
+  const ranking = Object.values(getGroupSummary())
+    .sort((a, b) => b.totalPoints - a.totalPoints);
+
+  rankingList.innerHTML = ranking
+    .map(
+      ({ group, totalPoints, challenges: challengeCount }, index) => `
+        <article
+          class="flex items-center justify-between gap-4 rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900"
+        >
+          <div class="flex items-center gap-4">
+            <div
+              class="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 font-bold text-blue-700 dark:bg-blue-950 dark:text-blue-300"
+            >
+              #${index + 1}
+            </div>
+
+            <div>
+              <h3 class="font-bold">
+                ${group}
+              </h3>
+
+              <p class="text-sm text-slate-500 dark:text-slate-400">
+                ${challengeCount} challenges
+              </p>
+            </div>
+          </div>
+
+          <div class="text-right">
+            <p
+              class="text-xl font-bold text-blue-700 dark:text-blue-300"
+            >
+              ${totalPoints}
+            </p>
+
+            <p
+              class="text-xs uppercase text-slate-500 dark:text-slate-400"
+            >
+              points
+            </p>
+          </div>
+        </article>
+      `
+    )
+    .join('');
+};
+
 const updateView = () => {
   const filtered = getFilteredChallenges();
   const sorted = sortChallenges(filtered);
