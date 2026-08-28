@@ -1,79 +1,93 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="PlayReal: explorador de retos con búsqueda, filtros, ordenamiento y estadísticas en tiempo real." />
-  <title>PlayReal · Retos filtrables</title>
-  <link rel="stylesheet" href="css/styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PlayReal Challenges lets university students search, filter, sort, and review challenges from their groups.">
+  <title>PlayReal - Challenges</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: "class" };
+    if (localStorage.getItem("theme") === "dark") {
+      document.documentElement.classList.add("dark");
+    }
+  </script>
 </head>
-<body>
-  <header class="site-header">
-    <div class="header-content">
-      <span class="logo" aria-label="PlayReal">🏆 PlayReal</span>
-      <span class="course-tag">HW06 · JavaScript Intermediate</span>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+  <header class="sticky top-0 z-50 border-b border-blue-800 bg-blue-700 text-white dark:border-slate-700 dark:bg-slate-900">
+    <div class="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-4 sm:px-6 lg:px-8">
+      <a href="#home" class="text-xl font-bold">PlayReal</a>
+      <nav class="hidden items-center gap-5 text-sm md:flex" aria-label="Main navigation">
+        <a href="#home" class="text-blue-100 hover:text-white">Home</a>
+        <a href="#challenges" class="font-semibold text-white">Challenges</a>
+        <a href="#groups" class="text-blue-100 hover:text-white">Groups</a>
+        <a href="#ranking" class="text-blue-100 hover:text-white">Ranking</a>
+      </nav>
+      <button id="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false" class="rounded-md border border-blue-400 bg-blue-600 px-3 py-2 text-sm font-semibold hover:bg-blue-500 dark:border-slate-600 dark:bg-slate-800">
+        <span id="theme-label">Dark Mode</span>
+      </button>
     </div>
   </header>
 
-  <main>
-    <section class="hero">
-      <p class="eyebrow">Tu progreso, tus retos, tu grupo</p>
-      <h1>Explora los retos de PlayReal</h1>
-      <p>Busca, filtra, ordena y analiza los retos de tu comunidad sin recargar la página.</p>
+  <main id="home">
+    <section class="border-b border-blue-100 bg-blue-50 px-4 py-12 dark:border-slate-800 dark:bg-slate-950 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <span class="inline-block rounded-md border border-blue-200 bg-white px-3 py-1 text-xs font-semibold uppercase tracking-wider text-blue-700 dark:border-blue-900 dark:bg-slate-900 dark:text-blue-300">PlayReal Challenges</span>
+        <h1 class="mt-5 max-w-4xl text-4xl font-bold leading-tight text-slate-950 dark:text-white sm:text-5xl">Find the next challenge for your group.</h1>
+        <p class="mt-4 max-w-3xl text-lg leading-relaxed text-slate-600 dark:text-slate-300">Search, filter, and sort the challenges created by your groups. Track points, participants, deadlines, and current status in one place.</p>
+      </div>
     </section>
 
-    <section class="stats" id="stats" aria-label="Estadísticas de retos"></section>
+    <section id="challenges" class="px-4 py-10 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <div id="stats" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4" aria-label="Challenge statistics"></div>
 
-    <section class="controls" aria-label="Controles de búsqueda, filtrado y ordenamiento">
-      <div class="search-control">
-        <label for="buscador">Buscar</label>
-        <input
-          type="search"
-          id="buscador"
-          placeholder="Buscar por reto o grupo..."
-          autocomplete="off"
-        />
+        <section class="mt-8 rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900" aria-label="Search, filter, and sort controls">
+          <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-6 xl:items-end">
+            <div class="md:col-span-2 xl:col-span-2">
+              <label for="search" class="mb-2 block text-sm font-semibold text-slate-700 dark:text-slate-200">Search</label>
+              <input id="search" type="search" placeholder="Search by challenge or group..." autocomplete="off" class="w-full rounded-md border border-slate-300 bg-white px-3 py-2.5 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:border-slate-600 dark:bg-slate-800 dark:focus:ring-blue-900">
+            </div>
+            <div>
+              <label for="category-filter" class="mb-2 block text-sm font-semibold text-slate-700 dark:text-slate-200">Category</label>
+              <select id="category-filter" class="w-full rounded-md border border-slate-300 bg-white px-3 py-2.5 text-sm dark:border-slate-600 dark:bg-slate-800"></select>
+            </div>
+            <div>
+              <label for="status-filter" class="mb-2 block text-sm font-semibold text-slate-700 dark:text-slate-200">Status</label>
+              <select id="status-filter" class="w-full rounded-md border border-slate-300 bg-white px-3 py-2.5 text-sm dark:border-slate-600 dark:bg-slate-800"></select>
+            </div>
+            <div>
+              <label for="group-filter" class="mb-2 block text-sm font-semibold text-slate-700 dark:text-slate-200">Group</label>
+              <select id="group-filter" class="w-full rounded-md border border-slate-300 bg-white px-3 py-2.5 text-sm dark:border-slate-600 dark:bg-slate-800"></select>
+            </div>
+            <div>
+              <label for="sort-select" class="mb-2 block text-sm font-semibold text-slate-700 dark:text-slate-200">Sort by</label>
+              <select id="sort-select" class="w-full rounded-md border border-slate-300 bg-white px-3 py-2.5 text-sm dark:border-slate-600 dark:bg-slate-800">
+                <option value="original">Original order</option>
+                <option value="title-asc">Name A → Z</option>
+                <option value="title-desc">Name Z → A</option>
+                <option value="points-asc">Points: low → high</option>
+                <option value="points-desc">Points: high → low</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="mt-4 flex flex-wrap items-center justify-between gap-3">
+            <p id="results-count" class="text-sm text-slate-500 dark:text-slate-400" aria-live="polite"></p>
+            <button id="clear-filters" type="button" class="rounded-md border border-blue-300 bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-100 dark:border-blue-900 dark:bg-blue-950 dark:text-blue-300">Clear filters</button>
+          </div>
+        </section>
+
+        <div class="mt-8">
+          <p class="text-sm font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-300">Challenge board</p>
+          <h2 class="mt-1 text-3xl font-bold">Available challenges</h2>
+        </div>
+        <section id="challenge-list" class="mt-5 grid gap-5 md:grid-cols-2 xl:grid-cols-3" aria-label="Challenge list" aria-live="polite"></section>
       </div>
-
-      <div class="filter-control">
-        <label for="filtro-categoria">Categoría</label>
-        <select id="filtro-categoria"></select>
-      </div>
-
-      <div class="filter-control">
-        <label for="filtro-estado">Estado</label>
-        <select id="filtro-estado"></select>
-      </div>
-
-      <div class="filter-control">
-        <label for="filtro-grupo">Grupo</label>
-        <select id="filtro-grupo"></select>
-      </div>
-
-      <div class="filter-control">
-        <label for="ordenar">Ordenar</label>
-        <select id="ordenar">
-          <option value="original">Orden original</option>
-          <option value="titulo-asc">Nombre A → Z</option>
-          <option value="titulo-desc">Nombre Z → A</option>
-          <option value="puntos-asc">Puntos: menor → mayor</option>
-          <option value="puntos-desc">Puntos: mayor → menor</option>
-        </select>
-      </div>
-
-      <button type="button" id="limpiar-filtros" class="secondary-button">Limpiar filtros</button>
     </section>
-
-    <div class="results-heading">
-      <h2>Retos</h2>
-      <p class="results-count" id="contador" aria-live="polite"></p>
-    </div>
-
-    <section class="results-grid" id="lista-retos" aria-label="Lista de retos" aria-live="polite"></section>
   </main>
 
-  <footer>PlayReal — Tarea 6 · DSAW · Universidad de La Sabana</footer>
-
+  <footer class="border-t border-slate-200 bg-white px-4 py-8 text-center text-sm text-slate-500 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400">PlayReal — HW06 · DSAW · Universidad de La Sabana</footer>
   <script src="data.js"></script>
   <script src="app.js"></script>
 </body>
