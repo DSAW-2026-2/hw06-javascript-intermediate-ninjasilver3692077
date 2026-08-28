@@ -1,29 +1,29 @@
-/* exported retos */
-// Dataset de retos de PlayReal — Tarea 6 (JS Intermediate)
-// Cada reto tiene: titulo, categoria, grupo, fechaLimite, estado, puntos, participantes
-const retos = [
-  { id: 1, titulo: '30 flexiones diarias', categoria: 'Fitness', grupo: 'Los Madrugadores', fechaLimite: '2026-09-02', estado: 'Activo', puntos: 40, participantes: 6 },
-  { id: 2, titulo: 'Repasar 2 capitulos de calculo', categoria: 'Estudio', grupo: 'Team Sabana', fechaLimite: '2026-08-20', estado: 'Completado', puntos: 60, participantes: 4 },
-  { id: 3, titulo: 'Dibujar un mini comic', categoria: 'Creatividad', grupo: 'Racha Squad', fechaLimite: '2026-09-05', estado: 'Activo', puntos: 35, participantes: 5 },
-  { id: 4, titulo: 'Organizar una salida grupal', categoria: 'Social', grupo: 'Reto Semanal', fechaLimite: '2026-08-10', estado: 'Vencido', puntos: 25, participantes: 8 },
-  { id: 5, titulo: 'Meditar 10 minutos diarios', categoria: 'Bienestar', grupo: 'Los Constantes', fechaLimite: '2026-09-01', estado: 'Activo', puntos: 30, participantes: 7 },
-  { id: 6, titulo: 'Correr 5k sin parar', categoria: 'Fitness', grupo: 'Team Sabana', fechaLimite: '2026-08-15', estado: 'Completado', puntos: 70, participantes: 9 },
-  { id: 7, titulo: 'Terminar el proyecto de bases de datos', categoria: 'Estudio', grupo: 'Los Madrugadores', fechaLimite: '2026-09-10', estado: 'Activo', puntos: 90, participantes: 3 },
-  { id: 8, titulo: 'Grabar un cover musical', categoria: 'Creatividad', grupo: 'Reto Semanal', fechaLimite: '2026-08-18', estado: 'Completado', puntos: 45, participantes: 4 },
-  { id: 9, titulo: 'Invitar a un nuevo integrante', categoria: 'Social', grupo: 'Los Constantes', fechaLimite: '2026-09-08', estado: 'Activo', puntos: 20, participantes: 10 },
-  { id: 10, titulo: 'Dormir 8 horas por 5 dias', categoria: 'Bienestar', grupo: 'Racha Squad', fechaLimite: '2026-08-05', estado: 'Vencido', puntos: 35, participantes: 6 },
-  { id: 11, titulo: 'Hacer 100 sentadillas en la semana', categoria: 'Fitness', grupo: 'Reto Semanal', fechaLimite: '2026-09-03', estado: 'Activo', puntos: 50, participantes: 5 },
-  { id: 12, titulo: 'Leer un articulo academico y resumirlo', categoria: 'Estudio', grupo: 'Racha Squad', fechaLimite: '2026-08-22', estado: 'Completado', puntos: 55, participantes: 4 },
-  { id: 13, titulo: 'Escribir un cuento corto', categoria: 'Creatividad', grupo: 'Los Madrugadores', fechaLimite: '2026-08-08', estado: 'Vencido', puntos: 30, participantes: 3 },
-  { id: 14, titulo: 'Cocinar para el grupo', categoria: 'Social', grupo: 'Team Sabana', fechaLimite: '2026-09-06', estado: 'Activo', puntos: 40, participantes: 7 },
-  { id: 15, titulo: 'Desconectarse de redes un dia completo', categoria: 'Bienestar', grupo: 'Reto Semanal', fechaLimite: '2026-08-19', estado: 'Completado', puntos: 25, participantes: 8 },
-  { id: 16, titulo: 'Plancha de 3 minutos', categoria: 'Fitness', grupo: 'Los Constantes', fechaLimite: '2026-09-04', estado: 'Activo', puntos: 45, participantes: 6 },
-  { id: 17, titulo: 'Preparar apuntes para el parcial', categoria: 'Estudio', grupo: 'Reto Semanal', fechaLimite: '2026-09-09', estado: 'Activo', puntos: 65, participantes: 5 },
-  { id: 18, titulo: 'Editar un video corto', categoria: 'Creatividad', grupo: 'Team Sabana', fechaLimite: '2026-09-07', estado: 'Activo', puntos: 50, participantes: 4 },
-  { id: 19, titulo: 'Organizar una noche de juegos', categoria: 'Social', grupo: 'Los Madrugadores', fechaLimite: '2026-08-14', estado: 'Completado', puntos: 30, participantes: 9 },
-  { id: 20, titulo: 'Caminar 10.000 pasos diarios', categoria: 'Bienestar', grupo: 'Team Sabana', fechaLimite: '2026-09-11', estado: 'Activo', puntos: 40, participantes: 6 },
-  { id: 21, titulo: 'Nadar 1km en la semana', categoria: 'Fitness', grupo: 'Racha Squad', fechaLimite: '2026-08-06', estado: 'Vencido', puntos: 55, participantes: 4 },
-  { id: 22, titulo: 'Practicar ingles 20 minutos diarios', categoria: 'Estudio', grupo: 'Los Constantes', fechaLimite: '2026-09-12', estado: 'Activo', puntos: 50, participantes: 5 },
-  { id: 23, titulo: 'Disenar un logo para el grupo', categoria: 'Creatividad', grupo: 'Los Constantes', fechaLimite: '2026-08-21', estado: 'Completado', puntos: 35, participantes: 3 },
-  { id: 24, titulo: 'Felicitar publicamente a un companero', categoria: 'Social', grupo: 'Racha Squad', fechaLimite: '2026-09-13', estado: 'Activo', puntos: 15, participantes: 10 }
+/* exported challenges */
+// PlayReal dataset for HW06 — JavaScript Intermediate.
+// It continues the same product concept introduced in HW05.
+const challenges = [
+  { id: 1, title: 'Read for 20 minutes every day', category: 'Study', group: 'Study Squad', deadline: '2026-09-02', status: 'Active', points: 120, participants: 8 },
+  { id: 2, title: 'Complete 30 push-ups every day', category: 'Fitness', group: 'Morning Crew', deadline: '2026-09-03', status: 'Active', points: 80, participants: 6 },
+  { id: 3, title: 'Review two calculus chapters', category: 'Study', group: 'Study Squad', deadline: '2026-08-20', status: 'Completed', points: 100, participants: 5 },
+  { id: 4, title: 'Create a one-page comic', category: 'Creativity', group: 'Creative Club', deadline: '2026-09-05', status: 'Active', points: 70, participants: 4 },
+  { id: 5, title: 'Organize a group activity', category: 'Social', group: 'Campus Friends', deadline: '2026-08-10', status: 'Expired', points: 60, participants: 9 },
+  { id: 6, title: 'Meditate for 10 minutes daily', category: 'Wellness', group: 'Streak Squad', deadline: '2026-09-01', status: 'Active', points: 90, participants: 7 },
+  { id: 7, title: 'Run 5 km without stopping', category: 'Fitness', group: 'Morning Crew', deadline: '2026-08-15', status: 'Completed', points: 140, participants: 6 },
+  { id: 8, title: 'Finish the database project', category: 'Study', group: 'Study Squad', deadline: '2026-09-10', status: 'Active', points: 160, participants: 5 },
+  { id: 9, title: 'Record a music cover', category: 'Creativity', group: 'Creative Club', deadline: '2026-08-18', status: 'Completed', points: 110, participants: 4 },
+  { id: 10, title: 'Invite a new group member', category: 'Social', group: 'Campus Friends', deadline: '2026-09-08', status: 'Active', points: 50, participants: 10 },
+  { id: 11, title: 'Sleep eight hours for five days', category: 'Wellness', group: 'Streak Squad', deadline: '2026-08-05', status: 'Expired', points: 100, participants: 6 },
+  { id: 12, title: 'Complete 100 squats this week', category: 'Fitness', group: 'Morning Crew', deadline: '2026-09-04', status: 'Active', points: 95, participants: 7 },
+  { id: 13, title: 'Summarize an academic article', category: 'Study', group: 'Study Squad', deadline: '2026-08-22', status: 'Completed', points: 115, participants: 5 },
+  { id: 14, title: 'Write a short story', category: 'Creativity', group: 'Creative Club', deadline: '2026-08-08', status: 'Expired', points: 75, participants: 3 },
+  { id: 15, title: 'Cook a meal for the group', category: 'Social', group: 'Campus Friends', deadline: '2026-09-06', status: 'Active', points: 85, participants: 8 },
+  { id: 16, title: 'Stay off social media for one day', category: 'Wellness', group: 'Streak Squad', deadline: '2026-08-19', status: 'Completed', points: 65, participants: 9 },
+  { id: 17, title: 'Hold a three-minute plank', category: 'Fitness', group: 'Morning Crew', deadline: '2026-09-07', status: 'Active', points: 90, participants: 6 },
+  { id: 18, title: 'Prepare notes for the next exam', category: 'Study', group: 'Study Squad', deadline: '2026-09-09', status: 'Active', points: 130, participants: 7 },
+  { id: 19, title: 'Edit a short video', category: 'Creativity', group: 'Creative Club', deadline: '2026-09-11', status: 'Active', points: 105, participants: 4 },
+  { id: 20, title: 'Host a board game night', category: 'Social', group: 'Campus Friends', deadline: '2026-08-14', status: 'Completed', points: 75, participants: 10 },
+  { id: 21, title: 'Walk 10,000 steps every day', category: 'Wellness', group: 'Streak Squad', deadline: '2026-09-12', status: 'Active', points: 100, participants: 8 },
+  { id: 22, title: 'Swim one kilometer this week', category: 'Fitness', group: 'Morning Crew', deadline: '2026-08-06', status: 'Expired', points: 125, participants: 5 },
+  { id: 23, title: 'Practice English for 20 minutes daily', category: 'Study', group: 'Study Squad', deadline: '2026-09-13', status: 'Active', points: 110, participants: 6 },
+  { id: 24, title: 'Design a logo for your group', category: 'Creativity', group: 'Creative Club', deadline: '2026-08-21', status: 'Completed', points: 80, participants: 4 }
 ];
