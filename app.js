@@ -12,6 +12,8 @@ const resultsCount = document.getElementById('results-count');
 const statsPanel = document.getElementById('stats');
 const themeToggle = document.getElementById('theme-toggle');
 const themeLabel = document.getElementById('theme-label');
+const groupsList = document.getElementById('groups-list');
+const rankingList = document.getElementById('ranking-list');
 
 const uniqueValues = (property) =>
   [...new Set(challenges.map((challenge) => challenge[property]))]
