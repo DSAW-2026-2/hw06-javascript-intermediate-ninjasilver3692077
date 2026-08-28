@@ -303,3 +303,5 @@ clearFiltersButton.addEventListener('click', resetControls);
 
 updateThemeButton();
 updateView();
+renderGroups();
+renderRanking();
