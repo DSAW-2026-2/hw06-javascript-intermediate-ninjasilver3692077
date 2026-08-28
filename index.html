@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="PlayReal: explorador de retos con búsqueda, filtros, ordenamiento y estadísticas en tiempo real." />
+  <title>PlayReal · Retos filtrables</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-content">
+      <span class="logo" aria-label="PlayReal">🏆 PlayReal</span>
+      <span class="course-tag">HW06 · JavaScript Intermediate</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow">Tu progreso, tus retos, tu grupo</p>
+      <h1>Explora los retos de PlayReal</h1>
+      <p>Busca, filtra, ordena y analiza los retos de tu comunidad sin recargar la página.</p>
+    </section>
+
+    <section class="stats" id="stats" aria-label="Estadísticas de retos"></section>
+
+    <section class="controls" aria-label="Controles de búsqueda, filtrado y ordenamiento">
+      <div class="search-control">
+        <label for="buscador">Buscar</label>
+        <input
+          type="search"
+          id="buscador"
+          placeholder="Buscar por reto o grupo..."
+          autocomplete="off"
+        />
+      </div>
+
+      <div class="filter-control">
+        <label for="filtro-categoria">Categoría</label>
+        <select id="filtro-categoria"></select>
+      </div>
+
+      <div class="filter-control">
+        <label for="filtro-estado">Estado</label>
+        <select id="filtro-estado"></select>
+      </div>
+
+      <div class="filter-control">
+        <label for="filtro-grupo">Grupo</label>
+        <select id="filtro-grupo"></select>
+      </div>
+
+      <div class="filter-control">
+        <label for="ordenar">Ordenar</label>
+        <select id="ordenar">
+          <option value="original">Orden original</option>
+          <option value="titulo-asc">Nombre A → Z</option>
+          <option value="titulo-desc">Nombre Z → A</option>
+          <option value="puntos-asc">Puntos: menor → mayor</option>
+          <option value="puntos-desc">Puntos: mayor → menor</option>
+        </select>
+      </div>
+
+      <button type="button" id="limpiar-filtros" class="secondary-button">Limpiar filtros</button>
+    </section>
+
+    <div class="results-heading">
+      <h2>Retos</h2>
+      <p class="results-count" id="contador" aria-live="polite"></p>
+    </div>
+
+    <section class="results-grid" id="lista-retos" aria-label="Lista de retos" aria-live="polite"></section>
+  </main>
+
+  <footer>PlayReal — Tarea 6 · DSAW · Universidad de La Sabana</footer>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
