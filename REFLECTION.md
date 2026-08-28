@@ -1,51 +1,57 @@
 # REFLECTION — HW06 JavaScript Intermediate
 
-## Operación elegida: construir las estadísticas de los retos visibles
+## ¿Por qué usé `reduce` en lugar de `forEach`?
 
-En PlayReal el panel de estadísticas debe cambiar cada vez que el usuario busca, filtra u ordena. Para ello necesitaba recorrer la lista visible y producir un único resumen con el total de retos, la suma de puntos y el conteo por categoría.
+En PlayReal necesitaba calcular varias estadísticas a partir de la lista de retos que queda después de aplicar la búsqueda y los filtros. Para cada conjunto visible calculo la cantidad total de retos, la suma de puntos, la cantidad de retos activos y el conteo por categoría.
 
-### Versión equivalente con `forEach`
+Para esta operación usé `reduce` porque el objetivo no es solamente recorrer el arreglo, sino transformar todo el arreglo en un único objeto resumen.
 
-```js
-function calcularStatsForEach(items) {
-  const resumen = {
-    total: 0,
-    puntosTotales: 0,
-    porCategoria: {}
-  };
-
-  items.forEach(({ categoria, puntos }) => {
-    resumen.total += 1;
-    resumen.puntosTotales += puntos;
-    resumen.porCategoria[categoria] = (resumen.porCategoria[categoria] || 0) + 1;
-  });
-
-  return resumen;
-}
-```
-
-### Versión con `reduce` usada en `app.js`
+### Versión implementada con `reduce`
 
 ```js
-const resumen = items.reduce(
-  (acumulado, { categoria, puntos }) => ({
-    total: acumulado.total + 1,
-    puntosTotales: acumulado.puntosTotales + puntos,
-    porCategoria: {
-      ...acumulado.porCategoria,
-      [categoria]: (acumulado.porCategoria[categoria] || 0) + 1
+const summary = items.reduce(
+  (accumulator, { category, points, status }) => ({
+    total: accumulator.total + 1,
+    totalPoints: accumulator.totalPoints + points,
+    active: accumulator.active + (status === 'Active' ? 1 : 0),
+    byCategory: {
+      ...accumulator.byCategory,
+      [category]: (accumulator.byCategory[category] || 0) + 1
     }
   }),
-  { total: 0, puntosTotales: 0, porCategoria: {} }
+  { total: 0, totalPoints: 0, active: 0, byCategory: {} }
 );
 ```
 
-## ¿Por qué elegí `reduce`?
+El acumulador comienza con un objeto que representa el resumen vacío. En cada elemento `total` aumenta, `totalPoints` suma los puntos, `active` aumenta si el estado es `Active` y `byCategory` actualiza el contador de la categoría actual. Al terminar, `reduce` devuelve directamente el objeto que necesito para construir el panel de estadísticas.
 
-`forEach` sirve para ejecutar una acción por cada elemento, pero no está pensado específicamente para transformar todo un arreglo en un único valor. En la versión con `forEach` tengo que crear `resumen` antes de empezar y después modificar ese objeto desde dentro del callback.
+## La misma operación con `forEach`
 
-Con `reduce`, en cambio, la intención de la operación queda explícita: parto de un acumulador inicial y cada reto produce la siguiente versión del resumen. Al terminar, el resultado de `reduce` ya es exactamente el objeto que necesito para renderizar las estadísticas.
+```js
+const summary = {
+  total: 0,
+  totalPoints: 0,
+  active: 0,
+  byCategory: {}
+};
 
-En este caso considero más claro `reduce` porque estoy haciendo una operación de acumulación: varios retos de entrada se convierten en un solo objeto de salida. También me permite calcular en un único recorrido el total de retos, la suma de puntos y el conteo por categoría.
+items.forEach(({ category, points, status }) => {
+  summary.total += 1;
+  summary.totalPoints += points;
 
-La parte que más atención requiere es recordar que el callback debe devolver el acumulador que utilizará la siguiente iteración. Si se olvida ese `return`, el acumulador de la siguiente vuelta sería `undefined`.
+  if (status === 'Active') {
+    summary.active += 1;
+  }
+
+  summary.byCategory[category] =
+    (summary.byCategory[category] || 0) + 1;
+});
+```
+
+Esta versión funciona, pero depende de modificar una variable externa durante el recorrido. `forEach` ejecuta una función para cada elemento, pero no expresa por sí mismo que el resultado final del proceso es un único valor.
+
+## ¿Cuál considero más claro?
+
+Para este caso considero más claro `reduce` porque la intención de la operación es producir un resumen del arreglo. El valor inicial, el acumulador y el resultado final están contenidos en una sola operación. `forEach` me parece más apropiado cuando lo importante es realizar un efecto secundario por cada elemento.
+
+Además, el panel de estadísticas se calcula sobre los retos actualmente filtrados, así que cambia inmediatamente cuando cambia la búsqueda o cualquiera de los filtros.
