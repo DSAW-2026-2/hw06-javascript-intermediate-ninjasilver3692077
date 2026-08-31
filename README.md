@@ -4,7 +4,7 @@ Juan Esteban Gonzalez Villarreal
 
 # Pages link
 
-https://dsaw-2026-2.github.io/hw06-javascript-intermediate-ninjasilver3692077/#ranking
+https://dsaw-2026-2.github.io/hw06-javascript-intermediate-ninjasilver3692077/
 
 # HW06 — JavaScript Intermediate
 
