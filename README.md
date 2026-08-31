@@ -1,3 +1,11 @@
+# Name
+
+Juan Esteban Gonzalez Villarreal
+
+# Pages link
+
+https://dsaw-2026-2.github.io/hw06-javascript-intermediate-ninjasilver3692077/
+
 # HW06 — JavaScript Intermediate
 
 **Week 6 · DSAW · Universidad de La Sabana**
